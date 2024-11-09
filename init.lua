@@ -1229,3 +1229,21 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+vim.cmd 'Neotree'
+vim.cmd 'vertical resize -12'
+-- Switch focus back to the main text window
+vim.defer_fn(function()
+  vim.cmd 'wincmd l'
+end, 5)
+
+-- Auto-close Neotree if it's the last window open
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  callback = function()
+    if #vim.api.nvim_tabpage_list_wins(0) == 1 and vim.bo.filetype == 'neo-tree' then
+      vim.cmd 'q'
+    end
+  end,
+})
+-- Disable Shada (session) Data
+vim.opt.shadafile = 'NONE'
