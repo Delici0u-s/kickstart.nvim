@@ -1357,6 +1357,24 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+  {
+    'Chiel92/vim-autoformat',
+    config = function()
+      -- Autoformat configuration
+      -- Trigger autoformat on save
+      vim.cmd [[
+        augroup AutoFormatGroup
+          autocmd!
+          autocmd BufWrite * :Autoformat
+        augroup END
+      ]]
+
+      -- Disable autoindent and retab, but enable removing trailing spaces
+      vim.g.autoformat_autoindent = 0
+      vim.g.autoformat_retab = 0
+      vim.g.autoformat_remove_trailing_spaces = 1
+    end,
+  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -1476,3 +1494,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 -- Disable Shada (session) Data
 vim.opt.shadafile = 'NONE'
+
+-- Enable filetype-specific plugins and indentation
+vim.cmd 'filetype plugin indent on'
+vim.cmd 'set tabstop=4'
+vim.cmd 'set shiftwidth=4'
+vim.cmd 'set expandtab'
