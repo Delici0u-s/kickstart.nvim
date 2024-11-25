@@ -1495,8 +1495,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- Disable Shada (session) Data
 vim.opt.shadafile = 'NONE'
 
--- Enable filetype-specific plugins and indentation
-vim.cmd 'filetype plugin indent on'
-vim.cmd 'set tabstop=4'
-vim.cmd 'set shiftwidth=4'
-vim.cmd 'set expandtab'
+vim.api.nvim_set_keymap('i', '{', '{}<Esc>ha', { noremap = true })
+vim.api.nvim_set_keymap('i', '(', '()<Esc>ha', { noremap = true })
+vim.api.nvim_set_keymap('i', '[', '[]<Esc>ha', { noremap = true })
+vim.api.nvim_set_keymap('i', '"', '""<Esc>ha', { noremap = true })
+vim.api.nvim_set_keymap('i', "'", "''<Esc>ha", { noremap = true })
+vim.api.nvim_set_keymap('i', '`', '``<Esc>ha', { noremap = true })
